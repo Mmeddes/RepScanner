@@ -91,7 +91,7 @@ def hash_reputation():
         """ This is a function to get a suspicious file hash results out of virus total API """
 
         # Setting the API key
-        api_key = "e67e59741e2709390e4835f2a8e0b564bf8f72c16964a32aa33143589b478c1b"
+        api_key = "e67e59741e2709390e4835f2a8e0b564bf8f72c16964a32aa33143589b478c1b"  # Changed this to your API key
 
         # Setting the base URL to send an HTTPS request
         base_url = "https://www.virustotal.com/api/v3/files/"
@@ -327,7 +327,7 @@ def hash_reputation():
         """ This is a function to get all the relevant details about a hash via otx """
 
         # Setting the API key
-        api_key = 'ff53eb11cd52a408297df82944e99b5e86349a10782d601392439bf0739108fc'
+        api_key = 'ff53eb11cd52a408297df82944e99b5e86349a10782d601392439bf0739108fc'  # Changed this to your API key
 
         # The real OTX url for a ref
         otx_url_refer = 'https://otx.alienvault.com/indicator/file/'
@@ -592,7 +592,7 @@ def domain_reputation():
         ''' This is a function to get all relevant information about a Domain from VirusTotal '''
 
         # Setting the API key
-        api_key = "e67e59741e2709390e4835f2a8e0b564bf8f72c16964a32aa33143589b478c1b"
+        api_key = "e67e59741e2709390e4835f2a8e0b564bf8f72c16964a32aa33143589b478c1b"  # Changed this to your API key
 
         # Setting the base URL
         base_url = "https://www.virustotal.com/api/v3/urls/"
@@ -842,7 +842,7 @@ def domain_reputation():
         """ This is a function to get all the relevant details about a Domain via otx """
 
         # Setting the API key
-        api_key = 'ff53eb11cd52a408297df82944e99b5e86349a10782d601392439bf0739108fc'
+        api_key = 'ff53eb11cd52a408297df82944e99b5e86349a10782d601392439bf0739108fc'  # Changed this to your API key
 
         # Setting the request to otx
         otx = OTXv2(api_key)
@@ -1034,7 +1034,7 @@ def url_reputation():
         ''' This is a function to get all relevant information about a URL from VirusTotal '''
 
         # Setting the API key
-        api_key = "e67e59741e2709390e4835f2a8e0b564bf8f72c16964a32aa33143589b478c1b"
+        api_key = "e67e59741e2709390e4835f2a8e0b564bf8f72c16964a32aa33143589b478c1b"  # Changed this to your API key
 
         # Setting the base URL
         base_url = "https://www.virustotal.com/api/v3/urls/"
@@ -1284,7 +1284,7 @@ def url_reputation():
     def urlscan():
         ''' This is a function to get all relevant information about a URL from URLSCAN '''
 
-        api_key = '8e31a93d-8891-4228-ace6-213fd6569a6d'
+        api_key = '8e31a93d-8891-4228-ace6-213fd6569a6d'  # Changed this to your API key
 
         headers = {'API-Key': api_key, 'Content-Type': 'application/json'}
         data = {"url": obj, "visibility": "public"}
@@ -1350,7 +1350,7 @@ def ip_reputation():
         ''' This is a function to get all relevant information about an IP address from VirusTotal '''
 
         # Setting the API key
-        api_key = "e67e59741e2709390e4835f2a8e0b564bf8f72c16964a32aa33143589b478c1b"
+        api_key = "e67e59741e2709390e4835f2a8e0b564bf8f72c16964a32aa33143589b478c1b"  # Changed this to your API key
 
         # Setting the base URL
         base_url = "https://www.virustotal.com/api/v3/urls/"
@@ -1600,7 +1600,7 @@ def ip_reputation():
     def abuseipdb():
         ''' This is a function to get all relevant information about an IP address from AbuseIPDB '''
 
-        api_key = '9eca643ebd512171bb9738b15bd7d8df66426b733a66adce98d0da6c51764969cca9a499027c5eb3'
+        api_key = '9eca643ebd512171bb9738b15bd7d8df66426b733a66adce98d0da6c51764969cca9a499027c5eb3'  # Changed this to your API key
         url = 'https://api.abuseipdb.com/api/v2/check'
         headers = {
             'Accept': 'application/json',
@@ -1790,7 +1790,7 @@ def ip_reputation():
     def shodan_ip():
         ''' This is a function to get all relevant information about an IP address via SHODAN '''
 
-        api = shodan.Shodan('PIqmvZGscF1danpntcj5qOUfLcrKuFig')
+        api = shodan.Shodan('PIqmvZGscF1danpntcj5qOUfLcrKuFig')  # Changed this to your API key
 
         try:
             info = api.host(ip)
@@ -1887,7 +1887,6 @@ def ip_reputation():
             print(f'{Fore.BLUE}No analysis available via SHODAN about: {Fore.CYAN}{ip}')
             print(f"{Fore.WHITE}--- End of SHODAN analysis ---\n")
 
-
     # This is a for loop to iterate over to IP addresses in the list provided by the user
     for ip in ip_list:
         print(f"{Fore.LIGHTGREEN_EX}[+]  {Fore.GREEN}START of Reputation scans for: {Fore.WHITE}{ip}  {Fore.LIGHTGREEN_EX}[+]")
@@ -1909,3 +1908,6 @@ elif args.ip_list:
 else:
     # Help when no arguments are given
     print(f'{Fore.BLUE}For HELP execute: {Fore.WHITE}python main.py -h')
+    
+    
+# End Of script
