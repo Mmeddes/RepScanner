@@ -9,6 +9,7 @@ Reputation scan tool, automated reputation scan for hashes/URLs/Domains/IPs.
 *  [Install vxapi.py](https://github.com/PayloadSecurity/VxAPI)
 
 ## Usage
+Setting the API keys for all the reputation scanners and the path for Vxapi:
 * api_key_vt: Changed this to your VT API key
 * api_key_otx: Changed this to yout OTX API key
 * api_key_urlscan: Changed this to your URLSCAN API key
