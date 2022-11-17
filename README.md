@@ -1,5 +1,6 @@
 # RepScanner Utility
-Reputation scan tool, automated reputation scan for hashes/URLs/Domains/IPs. This tool was build to help blue teamers while invetigating large amount of IOCs. Feel free to use and give advices about the code. 
+Reputation scan tool, automated reputation scan for hashes/URLs/Domains/IPs. This tool is built to help blue teamers while invetigating large amount of IOCs. It takes any IOC and report back to the user all relevant details an analyst will need in order to determine weather a file is malicious or legitimate.
+Feel free to give edvices regarding the code.
 # dependencies
 ### You need to install the following libraries in order to use RepScanner utility.
 * [Install vt-py](https://github.com/VirusTotal/vt-py)
@@ -10,8 +11,8 @@ Reputation scan tool, automated reputation scan for hashes/URLs/Domains/IPs. Thi
 *  [Install vxapi.py](https://github.com/PayloadSecurity/VxAPI)
 
 # Usage
-### Setting the API keys:
 Search for the following columns within RepScanner source code and change them.
+### Setting the API keys:
 * 'api_key_vt': Changed this to your VT API key
 * 'api_key_otx': Changed this to your OTX API key
 * 'api_key_urlscan': Changed this to your URLSCAN API key
