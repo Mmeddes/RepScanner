@@ -83,11 +83,12 @@ ip_list = args.ip_list
 colorama.init(autoreset=True)
 
 # Setting the API keys
-api_key_vt = ""  ### Changed this
-api_key_otx = ''  ### Changed this
-api_key_urlscan = ''  ### Changed this
-api_key_abuseipdb = ''  ### Changed this
-api_key_shodan = ''  ### Changed this
+api_key_vt = "e67e59741e2709390e4835f2a8e0b564bf8f72c16964a32aa33143589b478c1b"  ### Changed this
+api_key_otx = 'ff53eb11cd52a408297df82944e99b5e86349a10782d601392439bf0739108fc'  ### Changed this
+api_key_urlscan = '8e31a93d-8891-4228-ace6-213fd6569a6d'  ### Changed this
+api_key_abuseipdb = '9eca643ebd512171bb9738b15bd7d8df66426b733a66adce98d0da6c51764969cca9a499027c5eb3'  ### Changed this
+api_key_shodan = 'PIqmvZGscF1danpntcj5qOUfLcrKuFig'  ### Changed this
+hybrid_analysis_path = '' ### Changed this
 
 
 # This is the parent function for all the *HASH* reputation scanners used in this script
@@ -471,7 +472,7 @@ def hash_reputation():
     def hybrid_analysis():
         """ This is a function to get all relevant details about a hash from HybridAnalysis """
 
-        os.chdir('/Users/matansalamon/Downloads/VxAPI-master')
+        os.chdir(hybrid_analysis_path)
         p1 = subprocess.run(['python', 'vxapi.py', 'search_hash', hash], capture_output=True, text=True,)
         output = p1.stdout
         output_json = json.loads(output)
@@ -1901,6 +1902,9 @@ elif args.ip_list:
 else:
     # Help when no arguments are given
     print(f'{Fore.BLUE}For HELP execute: {Fore.WHITE}python main.py -h')
+
+
+
 
 
 
