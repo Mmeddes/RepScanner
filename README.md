@@ -1,6 +1,5 @@
 # RepScanner Utility
 Reputation scan tool, automated reputation scan for hashes/URLs/Domains/IPs. This tool is built to help blue teamers while invetigating large amount of IOCs. It takes any IOC and report back to the user all relevant details an analyst will need in order to determine weather a file is malicious or legitimate.
-Feel free to give edvices regarding the code.
 # dependencies
 ### You need to install the following libraries in order to use RepScanner utility.
 * [Install vt-py](https://github.com/VirusTotal/vt-py)
