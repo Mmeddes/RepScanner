@@ -82,6 +82,14 @@ ip_list = args.ip_list
 # Setting the color len to eq the letters
 colorama.init(autoreset=True)
 
+# Setting the API keys
+api_key_vt = ""  ### Changed this
+api_key_otx = ''  ### Changed this
+api_key_urlscan = ''  ### Changed this
+api_key_abuseipdb = ''  ### Changed this
+api_key_shodan = ''  ### Changed this
+
+
 # This is the parent function for all the *HASH* reputation scanners used in this script
 def hash_reputation():
     ''' This is the parent function for all the *HASH* reputation scanners used in this script '''
@@ -89,9 +97,6 @@ def hash_reputation():
     # This is a function to get a suspicious file hash results out of virus total API
     def virus_total():
         """ This is a function to get a suspicious file hash results out of virus total API """
-
-        # Setting the API key
-        api_key = "e67e59741e2709390e4835f2a8e0b564bf8f72c16964a32aa33143589b478c1b"  # Changed this to your API key
 
         # Setting the base URL to send an HTTPS request
         base_url = "https://www.virustotal.com/api/v3/files/"
@@ -102,7 +107,7 @@ def hash_reputation():
         # Setting the headers with the API key inside
         headers = {
             "accept": "application/json",
-            "x-apikey": api_key
+            "x-apikey": api_key_vt
         }
 
         # Getting the response from the URL
@@ -118,7 +123,7 @@ def hash_reputation():
             print(f"{Fore.WHITE}--- End of VT analysis ---\n")
         else:
             # Setting the client and the request to the url
-            client = vt.Client(api_key)
+            client = vt.Client(api_key_vt)
             file = ("/files/")
             url = client.get_object(file + hash)
 
@@ -188,34 +193,40 @@ def hash_reputation():
             else:
                 pass
 
-            if 'product' in signature_info:
-                product = signature_info['product']
-            else:
+            try:
+                if 'product' in signature_info:
+                    product = signature_info['product']
+            except NameError:
                 pass
 
-            if 'internal name' in signature_info:
-                internal_name = signature_info['internal name']
-            else:
+            try:
+                if 'internal name' in signature_info:
+                    internal_name = signature_info['internal name']
+            except NameError:
                 pass
 
-            if 'file version' in signature_info:
-                file_version = signature_info['file version']
-            else:
+            try:
+                if 'file version' in signature_info:
+                    file_version = signature_info['file version']
+            except NameError:
                 pass
 
-            if 'original name' in signature_info:
-                original_name = signature_info['original name']
-            else:
+            try:
+                if 'original name' in signature_info:
+                    original_name = signature_info['original name']
+            except NameError:
                 pass
 
-            if 'copyright' in signature_info:
-                copyright = signature_info['copyright']
-            else:
+            try:
+                if 'copyright' in signature_info:
+                    copyright = signature_info['copyright']
+            except NameError:
                 pass
 
-            if 'description' in signature_info:
-                description = signature_info['description']
-            else:
+            try:
+                if 'description' in signature_info:
+                    description = signature_info['description']
+            except NameError:
                 pass
 
             # Printing the mandatory columns to the screen
@@ -326,14 +337,11 @@ def hash_reputation():
     def otx():
         """ This is a function to get all the relevant details about a hash via otx """
 
-        # Setting the API key
-        api_key = 'ff53eb11cd52a408297df82944e99b5e86349a10782d601392439bf0739108fc'  # Changed this to your API key
-
         # The real OTX url for a ref
         otx_url_refer = 'https://otx.alienvault.com/indicator/file/'
 
         # Setting the request to otx
-        otx = OTXv2(api_key)
+        otx = OTXv2(api_key_otx)
         results = otx.get_indicator_details_by_section(IndicatorTypes.FILE_HASH_SHA256, hash)
         results_full = otx.get_indicator_details_full(IndicatorTypes.FILE_HASH_SHA256, hash)
 
@@ -591,16 +599,13 @@ def domain_reputation():
     def virus_total_domain():
         ''' This is a function to get all relevant information about a Domain from VirusTotal '''
 
-        # Setting the API key
-        api_key = "e67e59741e2709390e4835f2a8e0b564bf8f72c16964a32aa33143589b478c1b"  # Changed this to your API key
-
         # Setting the base URL
         base_url = "https://www.virustotal.com/api/v3/urls/"
 
         # Setting the headers with the API key inside
         headers = {
             "accept": "application/json",
-            "x-apikey": api_key
+            "x-apikey": api_key_vt
         }
 
         response = requests.get(base_url + obj)
@@ -841,11 +846,8 @@ def domain_reputation():
     def otx_domain():
         """ This is a function to get all the relevant details about a Domain via otx """
 
-        # Setting the API key
-        api_key = 'ff53eb11cd52a408297df82944e99b5e86349a10782d601392439bf0739108fc'  # Changed this to your API key
-
         # Setting the request to otx
-        otx = OTXv2(api_key)
+        otx = OTXv2(api_key_otx)
 
         results = otx.get_indicator_details_by_section(IndicatorTypes.DOMAIN, obj)
         results_full = otx.get_indicator_details_full(IndicatorTypes.DOMAIN, obj)
@@ -1033,16 +1035,13 @@ def url_reputation():
     def virus_total_url():
         ''' This is a function to get all relevant information about a URL from VirusTotal '''
 
-        # Setting the API key
-        api_key = "e67e59741e2709390e4835f2a8e0b564bf8f72c16964a32aa33143589b478c1b"  # Changed this to your API key
-
         # Setting the base URL
         base_url = "https://www.virustotal.com/api/v3/urls/"
 
         # Setting the headers with the API key inside
         headers = {
             "accept": "application/json",
-            "x-apikey": api_key
+            "x-apikey": api_key_vt
         }
 
         response = requests.get(base_url + obj)
@@ -1284,9 +1283,7 @@ def url_reputation():
     def urlscan():
         ''' This is a function to get all relevant information about a URL from URLSCAN '''
 
-        api_key = '8e31a93d-8891-4228-ace6-213fd6569a6d'  # Changed this to your API key
-
-        headers = {'API-Key': api_key, 'Content-Type': 'application/json'}
+        headers = {'API-Key': api_key_urlscan, 'Content-Type': 'application/json'}
         data = {"url": obj, "visibility": "public"}
         response = requests.post('https://urlscan.io/api/v1/scan/', headers=headers, data=json.dumps(data))
 
@@ -1349,16 +1346,13 @@ def ip_reputation():
     def virustotal_ip():
         ''' This is a function to get all relevant information about an IP address from VirusTotal '''
 
-        # Setting the API key
-        api_key = "e67e59741e2709390e4835f2a8e0b564bf8f72c16964a32aa33143589b478c1b"  # Changed this to your API key
-
         # Setting the base URL
         base_url = "https://www.virustotal.com/api/v3/urls/"
 
         # Setting the headers with the API key inside
         headers = {
             "accept": "application/json",
-            "x-apikey": api_key
+            "x-apikey": api_key_vt
         }
 
         response = requests.get(base_url + ip)
@@ -1600,11 +1594,10 @@ def ip_reputation():
     def abuseipdb():
         ''' This is a function to get all relevant information about an IP address from AbuseIPDB '''
 
-        api_key = '9eca643ebd512171bb9738b15bd7d8df66426b733a66adce98d0da6c51764969cca9a499027c5eb3'  # Changed this to your API key
         url = 'https://api.abuseipdb.com/api/v2/check'
         headers = {
             'Accept': 'application/json',
-            'Key': api_key
+            'Key': api_key_abuseipdb
         }
         parameters = {
             'ipAddress': ip,
@@ -1711,7 +1704,7 @@ def ip_reputation():
 
             if w.domain_name == None and w.registrar == None and w.referral_url == None and w.updated_date == None and w.creation_date == None and w.expiration_date == None and w.name == None and w.org == None and w.country == None and w.state == None and w.city == None and w.address ==None:
                 print(f"{Fore.WHITE}\n--- Start of WHOIS analysis ---")
-                print(f'{Fore.BLUE}No analysis available from WHOIS about: {Fore.CYAN}{ip}')
+                print(f'{Fore.BLUE}No analysis available from WHOIS: {Fore.CYAN}{ip}')
                 print(f"{Fore.WHITE}--- End of WHOIS analysis ---\n")
             else:
 
@@ -1721,67 +1714,67 @@ def ip_reputation():
 
                 try:
                     print(f'{Fore.MAGENTA}Domain name: {Fore.WHITE}{w.domain_name}')
-                except:
+                except NameError:
                     pass
 
                 try:
                     print(f'{Fore.MAGENTA}Registrar: {Fore.WHITE}{w.registrar}')
-                except:
+                except NameError:
                     pass
 
                 try:
                     print(f'{Fore.MAGENTA}Referral URL: {Fore.WHITE}{w.referral_url}')
-                except:
+                except NameError:
                     pass
 
                 try:
                     print(f'{Fore.MAGENTA}Updated date: {Fore.WHITE}{w.updated_date}')
-                except:
+                except NameError:
                     pass
 
                 try:
                     print(f'{Fore.MAGENTA}Creation date: {Fore.WHITE}{w.creation_date}')
-                except:
+                except NameError:
                     pass
 
                 try:
                     print(f'{Fore.MAGENTA}Expiration date: {Fore.WHITE}{w.expiration_date}')
-                except:
+                except NameError:
                     pass
 
                 try:
                     print(f'{Fore.MAGENTA}Name: {Fore.WHITE}{w.name}')
-                except:
+                except NameError:
                     pass
 
                 try:
                     print(f'{Fore.MAGENTA}org: {Fore.WHITE}{w.org}')
-                except:
+                except NameError:
                     pass
 
                 try:
                     print(f'{Fore.MAGENTA}country: {Fore.WHITE}{w.country}')
-                except:
+                except NameError:
                     pass
 
                 try:
                     print(f'{Fore.MAGENTA}state: {Fore.WHITE}{w.state}')
-                except:
+                except NameError:
                     pass
 
                 try:
                     print(f'{Fore.MAGENTA}city: {Fore.WHITE}{w.city}')
-                except:
+                except NameError:
                     pass
 
                 try:
                     print(f'{Fore.MAGENTA}address: {Fore.WHITE}{w.address}')
-                except:
+                except NameError:
                     pass
 
                 print(f"{Fore.WHITE}--- End of WHOIS analysis ---\n")
 
-        except:
+        except NameError:
             print(f"{Fore.WHITE}\n--- Start of WHOIS analysis ---")
             print(f'{Fore.BLUE}No analysis available from WHOIS about: {Fore.CYAN}{ip}')
             print(f"{Fore.WHITE}--- End of WHOIS analysis ---\n")
@@ -1790,7 +1783,7 @@ def ip_reputation():
     def shodan_ip():
         ''' This is a function to get all relevant information about an IP address via SHODAN '''
 
-        api = shodan.Shodan('PIqmvZGscF1danpntcj5qOUfLcrKuFig')  # Changed this to your API key
+        api = shodan.Shodan(api_key_shodan)
 
         try:
             info = api.host(ip)
@@ -1908,6 +1901,10 @@ elif args.ip_list:
 else:
     # Help when no arguments are given
     print(f'{Fore.BLUE}For HELP execute: {Fore.WHITE}python main.py -h')
-    
-    
-# End Of script
+
+
+
+
+
+
+
